@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-
+Route::get('/item', [ItemController::class, "index"]);
 
 // Route::get("/index", function(){
 //     return "TEST!!";

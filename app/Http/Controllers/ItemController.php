@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
+use App\Interfaces\ItemRepositoryInterface;
 use App\Models\Item;
 
 class ItemController extends Controller
 {
+
+    private ItemRepositoryInterface $itemRepository;
+
+    public function __construct(ItemRepositoryInterface $itemRepository)
+    {
+        $this->itemRepository = $itemRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = $this->itemRepository->getAllItems();
+        return view("item.item")
+        ->with("items", $items);
     }
 
     /**
