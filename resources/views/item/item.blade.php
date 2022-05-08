@@ -19,6 +19,12 @@
         <p>
             検索ワード: <input type="text" name="search">
         </p>
+        <p>
+            単価(以上): <input type="number" name="min">
+        </p>
+        <p>
+            単価(以下): <input type="number" name="max">
+        </p>
         <input type="submit" value="検索">
     </form>
 
@@ -42,7 +48,6 @@
     </table>
 
     {{ $items->links() }}
-    <!-- {{ $items->links('pagination::bootstrap-5') }} -->
 
 </body>
 </html>
