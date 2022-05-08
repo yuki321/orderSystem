@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Stock;
 
 class StockSeeder extends Seeder
 {
@@ -14,6 +15,6 @@ class StockSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Stock::factory()->times(70)->create();
     }
 }

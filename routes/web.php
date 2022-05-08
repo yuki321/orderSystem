@@ -24,6 +24,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-// ¤•iˆê——‰æ–Ê
+// å•†å“ä¸€è¦§ç”»é¢
 Route::get('/item', [ItemController::class, "index"]);
 

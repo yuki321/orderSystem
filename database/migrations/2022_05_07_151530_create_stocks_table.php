@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
+            $table->string("itemName")->unique();
+            $table->foreign("itemId")->references("id")->on("item");
+            $table->unsignedBigInteger("actualStock");
+            $table->unsignedBigInteger("minStock");
+            $table->unsignedBigInteger("decreasePerWeek");
             $table->timestamps();
         });
     }
