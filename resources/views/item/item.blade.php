@@ -14,6 +14,14 @@
         <a href="/dashboard">Main</a><br>
     </div>
 
+    <form action="/item" method="get">
+        @csrf
+        <p>
+            検索ワード: <input type="text" name="search">
+        </p>
+        <input type="submit" value="検索">
+    </form>
+
     <table class="table">
         <thead>
             <th>#</th>

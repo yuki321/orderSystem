@@ -24,8 +24,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+// 商品一覧画面
 Route::get('/item', [ItemController::class, "index"]);
 
-// Route::get("/index", function(){
-//     return "TEST!!";
-// });
