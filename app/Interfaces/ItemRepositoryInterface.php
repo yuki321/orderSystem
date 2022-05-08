@@ -2,9 +2,11 @@
 
 namespace App\Interfaces;
 
+use Illuminate\Http\Request;
+
 interface ItemRepositoryInterface {
 
-    public function getAllItems();
+    public function getAllItems(Request $request);
 
 }
 
