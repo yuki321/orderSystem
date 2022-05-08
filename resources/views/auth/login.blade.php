@@ -6,6 +6,7 @@
             </a>
         </x-slot>
 
+        <h1>Login</h1>
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
