@@ -13,8 +13,15 @@ class ItemRepository implements ItemRepositoryInterface {
 
         // 検索フォームに入力された内容を取得する
         $search = $request->input("search");
-        $min = $request->input("min");
         $max = $request->input("max");
+        $min = $request->input("min");
+
+        if($min > $max){
+            $tmp = $min;
+            $min = $max;
+            $max = $tmp;
+        }
+
 
         $query = DB::table("items");
 
