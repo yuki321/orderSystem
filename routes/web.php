@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ require __DIR__.'/auth.php';
 // 商品一覧画面
 Route::get('/item', [ItemController::class, "index"]);
 
+// 在庫一覧画面
+Route::get('/stock', [StockController::class, "index"]);

@@ -34,7 +34,7 @@
     <table class="table">
         <thead>
             <th>#</th>
-            <th scope="col">商品ID</th>
+            <th scope="col">商品名</th>
             <th scope="col">実在庫数</th>
             <th scope="col">下限在庫数</th>
             <th scope="col">週間減少在庫数</th>
@@ -43,7 +43,7 @@
             @foreach($stocks as $stock)
             <tr>
                 <td scope="row">{{ $stock->id }}</td>
-                <td>{{ $stock->itemId }}</td>
+                <td>{{ $stock->itemName }}</td>
                 <td>{{ $stock->actualStock }}</td>
                 <td>{{ $stock->minStock }}</td>
                 <td>{{ $stock->decreasePerWeek }}</td>

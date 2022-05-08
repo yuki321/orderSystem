@@ -12,7 +12,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a href="">発注履歴一覧</a><br>
                     <a href="">発注</a><br>
-                    <a href="">在庫一覧</a><br>
+                    <a href="/stock">在庫一覧</a><br>
                     <a href="/item">商品一覧</a><br>  
                 
                 

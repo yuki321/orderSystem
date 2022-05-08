@@ -1,10 +1,6 @@
 <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/register">新規登録
-                <!-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> -->
-            </a>
-        </x-slot>
+        <a href="/register">新規登録画面へ
 
         <h1>Login</h1>
         <!-- Session Status -->
