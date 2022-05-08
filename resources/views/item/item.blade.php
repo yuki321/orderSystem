@@ -20,10 +20,12 @@
             検索ワード: <input type="text" name="search">
         </p>
         <p>
+
             単価(上限): <input type="number" name="max">
         </p>
         <p>
             単価(下限): <input type="number" name="min">
+
         </p>
         <input type="submit" value="検索">
     </form>

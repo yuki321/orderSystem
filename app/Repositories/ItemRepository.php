@@ -22,6 +22,7 @@ class ItemRepository implements ItemRepositoryInterface {
             $max = $tmp;
         }
 
+
         $query = DB::table("items");
 
         // 検索内容の入力内容とDBを比較すて、部分一致があれば
