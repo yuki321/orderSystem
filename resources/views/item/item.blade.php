@@ -19,9 +19,16 @@
         <p>
             検索ワード: <input type="text" name="search">
         </p>
+        <p>
+            単価(上限): <input type="number" name="max">
+        </p>
+        <p>
+            単価(下限): <input type="number" name="min">
+        </p>
         <input type="submit" value="検索">
     </form>
 
+    @if($items->count() > 0)
     <table class="table">
         <thead>
             <th>#</th>
@@ -40,9 +47,11 @@
             @endforeach
         </tbody> 
     </table>
+    @else
+    <p><b>該当するデータはありません。</b></p>
+    @endif
 
     {{ $items->links() }}
-    <!-- {{ $items->links('pagination::bootstrap-5') }} -->
 
 </body>
 </html>
