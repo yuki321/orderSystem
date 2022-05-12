@@ -11,7 +11,7 @@ class StockRepository implements StockRepositoryInterface {
     public function getAllstocks(Request $request){
 
         // // 検索フォームに入力された内容を取得する
-        // $search = $request->input("search");
+        $search = $request->input("search");
         // $max = $request->input("max");
         // $min = $request->input("min");
 
@@ -25,9 +25,9 @@ class StockRepository implements StockRepositoryInterface {
         $query = DB::table("stocks");
 
         // // 検索内容の入力内容とDBを比較すて、部分一致があれば
-        // if($search){
-        //     $query->where("stockName", "like", "%".$search."%");
-        // }
+        if($search){
+            $query->where("itemName", "like", "%".$search."%");
+        }
         // // 単価の下限(min)
         // if($min){
         //     $query->where("unitPrice", ">=", $min);

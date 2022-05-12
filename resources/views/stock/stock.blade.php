@@ -14,21 +14,21 @@
         <a href="/dashboard">Main</a><br>
     </div>
 
-    <!-- <form action="/stock" method="get">
+    <form action="/stock" method="get">
         @csrf
         <p>
             検索ワード: <input type="text" name="search">
         </p>
-        <p>
+        <!-- <p>
 
             単価(上限): <input type="number" name="max">
         </p>
         <p>
             単価(下限): <input type="number" name="min">
 
-        </p>
+        </p> -->
         <input type="submit" value="検索">
-    </form> -->
+    </form>
 
     @if($stocks->count() > 0)
     <table class="table">
