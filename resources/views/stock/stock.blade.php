@@ -46,6 +46,11 @@
                 <td>{{ $stock->actualStock }}</td>
                 <td>{{ $stock->minStock }}</td>
                 <td>{{ $stock->decreasePerWeek }}</td>
+                @if($stock->actualStock < $stock->minStock)
+                <td style="color: red;"><b>在庫が下限在庫数を下回っています。</b></td>
+                @elseif($stock->actualStock - $stock->decreasePerWeek < $stock->minStock)
+                <td style="color: skyblue">1週間以内に在庫が下限在庫数を下回る可能性が高いです。</td>
+                @endif
             </tr>
             @endforeach
         </tbody> 
