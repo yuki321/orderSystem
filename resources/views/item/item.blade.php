@@ -34,7 +34,6 @@
     <table class="table">
         <thead>
             <th>#</th>
-            <th scope="col">商品ID</th>
             <th scope="col">商品名</th>
             <th scope="col">単価</th>
         </thead>
@@ -42,7 +41,6 @@
             @foreach($items as $item)
             <tr>
                 <td scope="row">{{ $item->id }}</td>
-                <td>{{ $item->itemId }}</td>
                 <td>{{ $item->itemName }}</td>
                 <td>{{ $item->unitPrice }}</td>
             </tr>

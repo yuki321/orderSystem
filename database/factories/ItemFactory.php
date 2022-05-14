@@ -18,7 +18,6 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            "itemId" => Str::random(5),
             "itemName" => $this->faker->name(),
             "unitPrice" => $this->faker->randomNumber(5),
         ];
