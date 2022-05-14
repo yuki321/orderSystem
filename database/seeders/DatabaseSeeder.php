@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             StockSeeder::class,
             AdminSeeder::class,
             CustomerSeeder::class,
+            OrderHistorySeeder::class,
         ]);
     }
 }
