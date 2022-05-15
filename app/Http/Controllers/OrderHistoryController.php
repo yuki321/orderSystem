@@ -27,13 +27,11 @@ class OrderHistoryController extends Controller
         // OrderHistoryテーブルからデータを取得
         $orderHistories = $this->orderHistoriesRepository->getAllOrderHistories($request);
 
-        $contents = $orderHistories->join("items", "order_histories.itemId", "=", "items.id")
-        ->get();
-        $contents = $orderHistories->join("customers", "order_histories.customerId", "=", "customers.id")
-        ->get();
+        $contents = $orderHistories->join("items", "order_histories.itemId", "=", "items.id");
+        $contents = $orderHistories->join("customers", "order_histories.customerId", "=", "customers.id");
 
         return view("orderHistory.orderHistory")
-        ->with("contents", $contents);
+        ->with("contents", $contents->paginate(20));
 
     }
 

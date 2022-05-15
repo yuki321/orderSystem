@@ -23,7 +23,11 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
             $max = $tmp;
         }
 
-        $query = OrderHistory::orderBy("order_histories.id");
+        $query = OrderHistory::where(function($contents){
+            $contents->select('id')
+            ->from('order_histories')
+            ->orderByDesc('order_histories.id');
+        });
         
         // // 検索内容の入力内容とDBを比較すて、部分一致があれば
         // if($search){

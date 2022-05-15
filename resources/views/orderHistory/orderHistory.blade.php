@@ -56,7 +56,7 @@
     <p><b>該当するデータはありません。</b></p>
     @endif
 
-
+    {{ $contents->links() }}
     
 </body>
 </html>
