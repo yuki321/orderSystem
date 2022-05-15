@@ -4,18 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderHistoryRequest;
 use App\Http\Requests\UpdateOrderHistoryRequest;
+use App\Interfaces\OrderHistoriesRepositoryInterface;
 use App\Models\OrderHistory;
+use Illuminate\Http\Request;
 
 class OrderHistoryController extends Controller
 {
+    private OrderHistoriesRepositoryInterface $orderHistoriesRepository;
+    public function __construct(OrderHistoriesRepositoryInterface $orderHistoriesRepository)
+    {
+        $this->orderHistoriesRepository = $orderHistoriesRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // OrderHistoryテーブルからデータを取得
+        $orderHistories = $this->orderHistoriesRepository->getAllOrderHistories($request);
+
+        $contents = $orderHistories->join("items", "order_histories.itemId", "=", "items.id")
+        ->get();
+        $contents = $orderHistories->join("customers", "order_histories.customerId", "=", "customers.id")
+        ->get();
+
+        return view("orderHistory.orderHistory")
+        ->with("contents", $contents);
+
     }
 
     /**

@@ -10,12 +10,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <a href="">発注履歴一覧</a><br>
+                    <a href="/orderHistory">発注履歴一覧</a><br>
                     <a href="">発注</a><br>
                     <a href="/stock">在庫一覧</a><br>
                     <a href="/item">商品一覧</a><br>  
-                
-                
 
                 </div>
             </div>

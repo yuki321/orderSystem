@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\StockController;
 
 /*
@@ -30,3 +31,6 @@ Route::get('/item', [ItemController::class, "index"]);
 
 // 在庫一覧画面
 Route::get('/stock', [StockController::class, "index"]);
+
+// 発注履歴画面
+Route::get('/orderHistory', [OrderHistoryController::class, "index"]);
