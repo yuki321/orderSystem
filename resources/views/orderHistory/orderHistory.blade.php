@@ -30,6 +30,7 @@
         <input type="submit" value="検索">
     </form>
 
+    @if($contents->count() > 0)
     <table class="table">
         <thead>
             <th>#</th>
@@ -49,10 +50,11 @@
 
             </tr>
             @endforeach
-
-
         </tbody> 
     </table>
+    @else
+    <p><b>該当するデータはありません。</b></p>
+    @endif
 
 
     

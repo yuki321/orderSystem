@@ -42,28 +42,6 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
         return $query;
     }
 
-    public function getItemName(Request $request)
-    {
-        $itemNames = DB::table("order_histories")
-        ->join("items", "order_histories.itemId", "=", "items.id")
-        ->select("items.itemName")
-        ->get();
-
-        return $itemNames;
-    }
-
-    public function getCompanyName(Request $request)
-    {
-        $companyNames = DB::table("order_histories")
-        ->join("customers", "order_histories.customerId", "=", "customers.id")
-        ->select("customers.companyName")
-        ->get();
-
-        return $companyNames;
-    }
-
-
-
 
 
 
