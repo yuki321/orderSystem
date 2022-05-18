@@ -13,14 +13,23 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
     public function getAllOrderHistories(Request $request){
 
         // 検索フォームに入力された内容を取得する
-        // $search = $request->input("search");
-        $max = $request->input("max");
-        $min = $request->input("min");
+        $item_name = $request->input("item_name");
+        $company_name = $request->input("company_name");
+        $order_max = $request->input("order_max");
+        $order_min = $request->input("order_min");
+        $totalPrice_max = $request->input("totalPrice_max");
+        $totalPrice_min = $request->input("totalPrice_min");
 
-        if($min > $max){
-            $tmp = $min;
-            $min = $max;
-            $max = $tmp;
+        // 上限 < 下限 の場合
+        if($order_min > $order_max){
+            $tmp = $order_min;
+            $order_min = $order_max;
+            $order_max = $tmp;
+        }
+        if($totalPrice_min > $totalPrice_max){
+            $tmp = $totalPrice_min;
+            $totalPrice_min = $totalPrice_max;
+            $totalPrice_max = $tmp;
         }
 
         $query = OrderHistory::where(function($contents){
@@ -29,20 +38,32 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
             ->orderByDesc('order_histories.id');
         });
         
-        // // 検索内容の入力内容とDBを比較すて、部分一致があれば
-        // if($search){
-        //     $query->where("itemName", "like", "%".$search."%");
-        // }
-        // // 単価の下限(min)
-        if($min){
-            $query->where("unitPrice", ">=", $min);
+        // 検索内容の入力内容とDBを比較すて、部分一致があれば
+        if($item_name){
+            $query->where("items.itemName", "like", "%".$item_name."%");
         }
-        // // 単価の上限(max)
-        if($max){
-            $query->where("unitPrice", "<=", $max);
+        if($company_name){
+            $query->where("customers.companyName", "like", "%".$company_name."%");
+        }
+
+        // 発注数の下限(order_min)
+        if($order_min){
+            $query->where("numOfOrder", ">=", $order_min);
+        }
+        // 発注数の上限(order_max)
+        if($order_max){
+            $query->where("numOfOrder", "<=", $order_max);
+        }
+
+        // 合計金額の下限(totalPrice_min)
+        if($totalPrice_min){
+            $query->where("totalPrice", ">=", $totalPrice_min);
+        }
+        // 合計金額の上限(totalPrice_max)
+        if($totalPrice_max){
+            $query->where("totalPrice", "<=", $totalPrice_max);
         }
         
-        // return $query->orderBy("id")->paginate(20);
         return $query;
     }
 

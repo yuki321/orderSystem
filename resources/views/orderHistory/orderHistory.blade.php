@@ -16,16 +16,23 @@
 
     <form action="/orderHistory" method="get">
         @csrf
-        <!-- <p>
-            検索ワード: <input type="text" name="search">
-        </p> -->
         <p>
-
-            単価(上限): <input type="number" name="max">
+            商品名: <input type="text" name="item_name">
         </p>
         <p>
-            単価(下限): <input type="number" name="min">
-
+            企業名: <input type="text" name="company_name">
+        </p>
+        <p>
+            発注数(上限): <input type="number" name="order_max">
+        </p>
+        <p>
+            発注数(下限): <input type="number" name="order_min">
+        </p>
+        <p>
+            合計金額(上限): <input type="number" name="totalPrice_max">
+        </p>
+        <p>
+            合計金額(下限): <input type="number" name="totalPrice_min">
         </p>
         <input type="submit" value="検索">
     </form>
