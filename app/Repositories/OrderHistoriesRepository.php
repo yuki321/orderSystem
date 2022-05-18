@@ -39,6 +39,19 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
         });
         
         // 検索内容の入力内容とDBを比較すて、部分一致があれば
+        $query = $this->getSearchResult($query, $item_name, $company_name);
+
+        // 発注数の上限下限を絞る
+        $query = $this->searchOrderMaxMin($query, $order_max, $order_min);
+
+        // 合計金額の上限下限を絞る
+        $query = $this->searchTotalPriceMaxMin($query, $totalPrice_max, $totalPrice_min);
+        
+        return $query;
+    }
+
+    public function getSearchResult($query, $item_name, $company_name){
+        // 検索内容の入力内容とDBを比較すて、部分一致があれば
         if($item_name){
             $query->where("items.itemName", "like", "%".$item_name."%");
         }
@@ -46,6 +59,10 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
             $query->where("customers.companyName", "like", "%".$company_name."%");
         }
 
+        return $query;
+    }
+
+    public function searchOrderMaxMin($query, $order_max, $order_min){
         // 発注数の下限(order_min)
         if($order_min){
             $query->where("numOfOrder", ">=", $order_min);
@@ -55,6 +72,10 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
             $query->where("numOfOrder", "<=", $order_max);
         }
 
+        return $query;
+    }
+
+    public function searchTotalPriceMaxMin($query, $totalPrice_max, $totalPrice_min){
         // 合計金額の下限(totalPrice_min)
         if($totalPrice_min){
             $query->where("totalPrice", ">=", $totalPrice_min);
@@ -63,7 +84,7 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
         if($totalPrice_max){
             $query->where("totalPrice", "<=", $totalPrice_max);
         }
-        
+
         return $query;
     }
 
