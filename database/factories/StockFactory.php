@@ -18,7 +18,7 @@ class StockFactory extends Factory
     public function definition()
     {
         return [
-            "itemName" => Str::random(5),
+            "itemId" => $this->faker->numberBetween($min = 1, $max = 50),
             "actualStock" => $this->faker->randomNumber(5),
             "minStock" => $this->faker->randomNumber(4),
             "decreasePerWeek" => $this->faker->randomNumber(5),

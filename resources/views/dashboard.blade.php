@@ -20,12 +20,7 @@
                     <a href="/orderHistory">発注履歴一覧</a><br>
                     <a href="">発注</a><br>
                     <a href="/stock">在庫一覧</a><br>
-                    <a href="/item">商品一覧</a><br>                   
-  
-                    @if($isAdmin)
-                    <p>成功!!</p>
-                    @endif
-  
+                    <a href="/item">商品一覧</a><br>                     
                 </div>
             </div>
         </div>
