@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\StockRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Models\Stock;
 use Illuminate\Support\Facades\DB;
 
 class StockRepository implements StockRepositoryInterface {
@@ -22,8 +23,11 @@ class StockRepository implements StockRepositoryInterface {
             $max = $tmp;
         }
 
-
-        $query = DB::table("stocks");
+       $query = Stock::where(function($contents){
+            $contents->select('id')
+            ->from('stocks')
+            ->orderByDesc('stocks.id');
+        });
 
         // 検索内容の入力内容とDBを比較して、部分一致があれば
         if($search){
@@ -39,7 +43,7 @@ class StockRepository implements StockRepositoryInterface {
             $query->where("actualStock", "<=", $max);
         }
                 
-        return $query->orderBy("id")->paginate(20);
+         return $query;
     }
 
 }

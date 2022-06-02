@@ -22,7 +22,7 @@
         <a href="/dashboard">Main</a><br>
     </div>
 
-    <form action="/stock" method="get">
+    <form action="/content" method="get">
         @csrf
         <p>
             検索ワード: <input type="text" name="search">
@@ -37,7 +37,7 @@
         <input type="submit" value="検索">
     </form>
 
-    @if($stocks->count() > 0)
+    @if($contents->count() > 0)
     <table class="table">
         <thead>
             <th>#</th>
@@ -47,16 +47,16 @@
             <th scope="col">週間減少在庫数</th>
         </thead>
         <tbody>
-            @foreach($stocks as $stock)
+            @foreach($contents as $content)
             <tr>
-                <td scope="row">{{ $stock->id }}</td>
-                <td>{{ $stock->itemName }}</td>
-                <td>{{ $stock->actualStock }}</td>
-                <td>{{ $stock->minStock }}</td>
-                <td>{{ $stock->decreasePerWeek }}</td>
-                @if($stock->actualStock < $stock->minStock)
+                <td scope="row">{{ $content->id }}</td>
+                <td>{{ $content->itemName }}</td>
+                <td>{{ $content->actualStock }}</td>
+                <td>{{ $content->minStock }}</td>
+                <td>{{ $content->decreasePerWeek }}</td>
+                @if($content->actualStock < $content->minStock)
                 <td style="color: red;"><b>在庫が下限在庫数を下回っています。</b></td>
-                @elseif($stock->actualStock - $stock->decreasePerWeek < $stock->minStock)
+                @elseif($content->actualStock - $content->decreasePerWeek < $content->minStock)
                 <td style="color: skyblue">1週間以内に在庫が下限在庫数を下回る可能性が高いです。</td>
                 @endif
             </tr>
@@ -67,7 +67,7 @@
     <p><b>該当するデータはありません。</b></p>
     @endif
 
-    {{ $stocks->links() }}
+    {{ $contents->links() }}
 
 </body>
 </html>

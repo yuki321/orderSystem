@@ -26,8 +26,10 @@ class StockController extends Controller
     public function index(Request $request)
     {
         $stocks = $this->stockRepository->getAllStocks($request);
+        $contents = $stocks->join("items", "stocks.itemId", "=", "items.id");
+
         return view("stock.stock")
-        ->with("stocks", $stocks);
+        ->with("contents", $contents->paginate(20));
     }
 
     /**
