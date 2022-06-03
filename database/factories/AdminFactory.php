@@ -19,13 +19,13 @@ class AdminFactory extends Factory
      */
     public function definition()
     {
+        $random_num = [
+            1, 2, 4, 3, 5, 6, 7
+        ];
         return [
-            // "userId" => Admin::factory()
-            // ->has(User::factory()->$this->faker->randomNumber(3))
-            // ->create(),
             'userId' => random_int(DB::table('users')->min('id'), DB::table('users')->max('id')),
             "adminName" => $this->faker->name(),
-            "admin" => $this->faker->randomNumber(1)
+            "admin" => $this->faker->randomElement($random_num),
         ];
     }
 }
