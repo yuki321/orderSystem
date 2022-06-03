@@ -35,7 +35,6 @@
                     <a href="">発注履歴削除</a><br>
                     <a href="">最低在庫設定機能</a><br>
                     <a href="">在庫修正機能</a><br>
-                    <a href="">ユーザ更新</a><br>
                 </div>
             </div>
         </div>
