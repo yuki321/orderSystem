@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateStockRequest;
 use App\Interfaces\StockRepositoryInterface;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
@@ -28,8 +30,20 @@ class StockController extends Controller
         $stocks = $this->stockRepository->getAllStocks($request);
         $contents = $stocks->join("items", "stocks.itemId", "=", "items.id");
 
+        // adminsテーブルから情報を取得
+        $admins = DB::table("admins")->get();
+        // ログインユーザのIDを取得
+        $userId = Auth::id();
+
+        // 管理者の場合true
+        $isAdmin = false;
+        foreach($admins as $admin){
+            if($userId == $admin->userId) $isAdmin = true;
+        }
+
         return view("stock.stock")
-        ->with("contents", $contents->paginate(20));
+        ->with("contents", $contents->paginate(20))
+        ->with("isAdmin", $isAdmin);
     }
 
     /**

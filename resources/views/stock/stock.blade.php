@@ -55,9 +55,20 @@
                 <td>{{ $content->minStock }}</td>
                 <td>{{ $content->decreasePerWeek }}</td>
                 @if($content->actualStock < $content->minStock)
-                <td style="color: red;"><b>在庫が下限在庫数を下回っています。</b></td>
+                
+                <!-- 下記は保留 -->
+                <!-- 管理者の場合、商品の下限在庫数設定機能を使用することができる -->
+                    @if($isAdmin)
+                    <td style="color: red;"><a href=""><b>在庫が下限在庫数を下回っています。</b></a></td>
+                    @else
+                    <td style="color: red;"><b>在庫が下限在庫数を下回っています。</b></td>
+                    @endif
                 @elseif($content->actualStock - $content->decreasePerWeek < $content->minStock)
-                <td style="color: skyblue">1週間以内に在庫が下限在庫数を下回る可能性が高いです。</td>
+                    @if($isAdmin)
+                    <td style="color: skyblue"><a href="">1週間以内に在庫が下限在庫数を下回る可能性が高いです。</a></td>
+                    @else
+                    <td style="color: skyblue">1週間以内に在庫が下限在庫数を下回る可能性が高いです。</td>
+                    @endif
                 @endif
             </tr>
             @endforeach
