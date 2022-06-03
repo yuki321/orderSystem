@@ -20,7 +20,11 @@
                     <a href="/orderHistory">発注履歴一覧</a><br>
                     <a href="">発注</a><br>
                     <a href="/stock">在庫一覧</a><br>
-                    <a href="/item">商品一覧</a><br>                     
+                    <a href="/item">商品一覧</a><br>
+                    <!-- 管理者の場合、管理者画面へのリンクが表示される -->
+                    @if($isAdmin)
+                    <a href="/admin">管理者画面</a>
+                    @endif
                 </div>
             </div>
         </div>

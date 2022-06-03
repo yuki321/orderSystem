@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderHistoryController;
@@ -38,3 +39,9 @@ Route::get('/stock', [StockController::class, "index"]);
 
 // 発注履歴画面
 Route::get('/orderHistory', [OrderHistoryController::class, "index"]);
+
+// 管理者画面
+Route::get('/admin', function(){
+    return view("admin.admin");
+});
+
