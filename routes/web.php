@@ -45,3 +45,6 @@ Route::get('/admin', function(){
     return view("admin.admin");
 });
 
+// 管理者一覧画面
+Route::get("/adminList", [AdminController::class, "index"]);
+
