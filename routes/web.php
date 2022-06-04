@@ -40,6 +40,7 @@ Route::get('/stock', [StockController::class, "index"]);
 // 発注履歴画面
 Route::get('/orderHistory', [OrderHistoryController::class, "index"]);
 
+/** 管理者 */
 // 管理者画面
 Route::get('/admin', function(){
     return view("admin.admin");
@@ -47,4 +48,10 @@ Route::get('/admin', function(){
 
 // 管理者一覧画面
 Route::get("/adminList", [AdminController::class, "index"]);
+
+// 管理者作成画面（新規管理者登録）
+Route::get("/createAdmin", [AdminController::class, "create"]);
+
+// 管理者作成
+Route::post("/adminList", [AdminController::class, "store"]);
 

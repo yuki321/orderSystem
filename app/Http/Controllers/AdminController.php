@@ -21,9 +21,9 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $admins = $this->adminRepository->getAllAdmins($request);
+        $admins = $this->adminRepository->getAllAdmins();
 
         return view("admin.adminList")
         ->with("admins", $admins);
@@ -36,7 +36,11 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        // 管理者以外とログインユーザーを取得
+        $usersWithoutAdmins = $this->adminRepository->getUsersWithoutAdmins();
+
+        return view("admin.createAdmin")
+        ->with("usersWithoutAdmins", $usersWithoutAdmins);
     }
 
     /**
@@ -45,9 +49,14 @@ class AdminController extends Controller
      * @param  \App\Http\Requests\StoreAdminRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAdminRequest $request)
+    public function store(Request $request)
     {
-        //
+        $admin = new Admin();
+        $admin->adminName = $request->adminName;
+        $admin->admin = $request->admin;
+        $admin->save();
+
+        redirect("/adminList");
     }
 
     /**

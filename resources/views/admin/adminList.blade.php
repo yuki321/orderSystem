@@ -37,6 +37,8 @@
         <input type="submit" value="検索">
     </form> -->
 
+    <a href="/createAdmin">新規管理者登録</a>
+
     @if($admins->count() > 0)
     <table class="table">
         <thead>
