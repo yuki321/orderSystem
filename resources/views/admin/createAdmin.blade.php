@@ -24,27 +24,40 @@
 
     <form action="/adminList" method="POST">
         @csrf
-        <!-- <p>
-            管理者名: <input type="text" name="adminName">
-        </p> -->
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li style="color: red"><b>{{ $error }}</b></li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
         <!-- 
             ドロップダウンリストからユーザーを選択
             ユーザーに紐づいたuserIdが作成ボタン押下時に
             送信される
         -->
+        <p>■管理者に設定したいユーザ名を選択して下さい</p>
         <select name="adminName" id="adminName">
-            <option value="userName">-- 管理者にするユーザーを選択して下さい --</option>
+            <option></option>
             @foreach($usersWithoutAdmins as $userWithoutAdmins)
-                <option value="admin">{{ $userWithoutAdmins }}</option>
+                <option value="{{ $userWithoutAdmins }}">{{ $userWithoutAdmins }}</option>
             @endforeach
         </select>
-        <p>
-            権限: <input type="number" name="admin">
-        </p>
-        <input type="submit" name="createAdmin" value="作成">
+        <p>■管理者に付与する権限を選択して下さい</p>
+        <div>
+            <input type="checkbox" value="管理者権限" name="authentication" id="auth">
+            <label for="auth">管理者権限</label></br>
+            <input type="checkbox" value="設定権限" name="setting" id="setting">
+            <label for="setting">設定権限</label></br>
+            <input type="checkbox" value="発注履歴削除権限" name="delOrderHistory" id="del">
+            <label for="del">発注履歴削除権限</label></br>
+        </div>
+        <input type="submit" name="adminList" value="作成">
     </form>
-    <a href="/adminList">戻る</a>
+    <a href="/adminList">管理者一覧画面</a>
 
 </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAdminRequest;
@@ -7,6 +6,8 @@ use App\Http\Requests\UpdateAdminRequest;
 use App\Interfaces\AdminRepositoryInterface;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -49,14 +50,27 @@ class AdminController extends Controller
      * @param  \App\Http\Requests\StoreAdminRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdminRequest $request)
     {
-        $admin = new Admin();
-        $admin->adminName = $request->adminName;
-        $admin->admin = $request->admin;
-        $admin->save();
+        $validator =  Validator::make($request->all());
 
-        redirect("/adminList");
+        if($validator->fails()){
+            return redirect("/createAdmin")
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+        $admin = new Admin();
+        $admin->userId = Auth::id();
+        $admin->adminName = $request->adminName;
+
+        // 権限を算出
+        $admin->admin = 0;
+        if($request->authentication) $admin->admin = $admin->admin + 4;
+        if($request->setting) $admin->admin = $admin->admin + 2;
+        if($request->delOrderHistory) $admin->admin = $admin->admin + 1;
+        
+        $admin->save();
     }
 
     /**

@@ -22,21 +22,6 @@
         <a href="/dashboard">Main</a><br>
     </div>
 
-    <!-- <form action="/content" method="get">
-        @csrf
-        <p>
-            検索ワード: <input type="text" name="search">
-        </p>
-
-        <p>
-            実在庫数(上限): <input type="number" name="max">
-        </p>
-        <p>
-            実在庫数(下限): <input type="number" name="min">
-        </p>
-        <input type="submit" value="検索">
-    </form> -->
-
     <a href="/createAdmin">新規管理者登録</a>
 
     @if($admins->count() > 0)
@@ -44,8 +29,6 @@
         <thead>
             <th>#</th>
             <th scope="col">管理者名</th>
-
-            <!-- ループにして、全部表示する？？ -->
             <th scope="col">権限</th>
         </thead>
         <tbody>
