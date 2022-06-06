@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Common\isAdmin;
 use App\Http\Requests\StoreStockRequest;
 use App\Http\Requests\UpdateStockRequest;
 
@@ -30,16 +31,8 @@ class StockController extends Controller
         $stocks = $this->stockRepository->getAllStocks($request);
         $contents = $stocks->join("items", "stocks.itemId", "=", "items.id");
 
-        // adminsテーブルから情報を取得
-        $admins = DB::table("admins")->get();
-        // ログインユーザのIDを取得
-        $userId = Auth::id();
-
-        // 管理者の場合true
-        $isAdmin = false;
-        foreach($admins as $admin){
-            if($userId == $admin->userId) $isAdmin = true;
-        }
+        // ログインユーザが管理者か確認 
+        $isAdmin = isAdmin::isAdmin();
 
         return view("stock.stock")
         ->with("contents", $contents->paginate(20))

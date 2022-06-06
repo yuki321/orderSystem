@@ -28,7 +28,11 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "classmap": [
+            "app/Common/"
+
+        ]
     },
     "scripts": {
         "post-autoload-dump": [
