@@ -13,7 +13,7 @@ class UpdateAdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,25 @@ class UpdateAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "adminName" => "required",
+            "admin" => "required",
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            "adminName" => "管理者名",
+            "admin" => "権限",
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            "adminName.required" => ":attributeを入力して下さい",
+            "admin.required" => ":attributeを最低1つ選択してください",
+        ];
+    }
+
 }

@@ -7,12 +7,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class AdminRepository implements AdminRepositoryInterface {
+    /**
+     * indexメソッド
+     * adminList.blade.php
+     */
     public function getAllAdmins(){
         $query = DB::table("admins");
 
         return $query->orderBy("id")->paginate(10);
     }
 
+    /**
+     * storeメソッド
+     * createAdmin.blade.php
+     */
     public function getUsersWithoutAdmins(){
         // 取得したユーザーから管理者を除く
         $usersWithoutAdmins = $this->removeAdmins();

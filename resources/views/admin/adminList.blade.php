@@ -37,6 +37,8 @@
                 <td scope="row">{{ $admin->id }}</td>
                 <td>{{ $admin->adminName }}</td>
                 <td>{{ $admin->admin }}</td>
+                <td><a href="/editAdmin/{{ $admin->id }}">編集</a></td>
+                <td><a href="/delete/{{ $admin->id }}">削除</a></td>
             </tr>
             @endforeach
         </tbody> 

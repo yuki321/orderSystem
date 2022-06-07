@@ -87,24 +87,38 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  string $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit(string $id)
     {
-        //
+        $admin = Admin::find($id);
+        return view("admin.editAdmin")
+        ->with("admin", $admin);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateAdminRequest  $request
-     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAdminRequest $request, Admin $admin)
+    public function update(UpdateAdminRequest $request)
     {
-        //
+        $admin = Admin::find($request->id);
+
+        // 権限の編集   
+        $admin->admin = 0;
+        if($request->authentication) $admin->admin = $admin->admin + 4;
+        if($request->setting) $admin->admin = $admin->admin + 2;
+        if($request->delOrderHistory) $admin->admin = $admin->admin + 1;
+
+        Admin::find($request->id)->update([
+            "adminName" => $request->adminName,
+            "admin" => $admin->admin
+        ]);
+
+        redirect("/adminList");
     }
 
     /**

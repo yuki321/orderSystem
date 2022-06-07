@@ -55,3 +55,9 @@ Route::get("/createAdmin", [AdminController::class, "create"]);
 // 管理者作成
 Route::post("/adminList", [AdminController::class, "store"]);
 
+// 管理者編集画面
+Route::get("/editAdmin/{id}", [AdminController::class, "edit"]);
+
+// 管理者編集
+Route::post("/adminList", [AdminController::class, "update"]);
+
