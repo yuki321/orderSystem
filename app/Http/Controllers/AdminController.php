@@ -50,15 +50,15 @@ class AdminController extends Controller
      * @param  \App\Http\Requests\StoreAdminRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAdminRequest $request)
+    public function store(Request $request)
     {
-        $validator =  Validator::make($request->all());
+        // $validator =  Validator::make($request->all());
 
-        if($validator->fails()){
-            return redirect("/createAdmin")
-            ->withErrors($validator)
-            ->withInput();
-        }
+        // if($validator->fails()){
+        //     return redirect("/createAdmin")
+        //     ->withErrors($validator)
+        //     ->withInput();
+        // }
 
         $admin = new Admin();
         $admin->userId = Auth::id();
@@ -71,6 +71,8 @@ class AdminController extends Controller
         if($request->delOrderHistory) $admin->admin = $admin->admin + 1;
         
         $admin->save();
+
+        return redirect("/adminList");
     }
 
     /**
@@ -103,22 +105,35 @@ class AdminController extends Controller
      * @param  \App\Http\Requests\UpdateAdminRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAdminRequest $request)
+    public function update(Request $request)
     {
+        // $validator =  Validator::make($request->all());
+
+        // if($validator->fails()){
+        //     return redirect("/editAdmin")
+        //     ->withErrors($validator)
+        //     ->withInput();
+        // }
+
         $admin = Admin::find($request->id);
 
         // 権限の編集   
-        $admin->admin = 0;
-        if($request->authentication) $admin->admin = $admin->admin + 4;
-        if($request->setting) $admin->admin = $admin->admin + 2;
-        if($request->delOrderHistory) $admin->admin = $admin->admin + 1;
+        $total = 0;
+        if(isset($request->authentication) | isset($request->setting) | isset($request->delOrderHistory)){
+            $total = (int)$request->authentication + (int)$request->setting + (int)$request->delOrderHistory;
+        }
 
-        Admin::find($request->id)->update([
-            "adminName" => $request->adminName,
-            "admin" => $admin->admin
-        ]);
+        $admin->adminName = $request->adminName;
+        $admin->admin = $total;
+        $admin->save();
 
-        redirect("/adminList");
+        return redirect("/adminList");
+    }
+
+    public function delete(string $id){
+        $admin = Admin::find($id);
+        return view("admin.deleteAdmin")
+        ->with("admin", $admin);
     }
 
     /**
@@ -127,8 +142,9 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(Request $request)
     {
-        //
+        Admin::find($request->id)->delete();
+        return redirect("/adminList");
     }
 }

@@ -61,3 +61,11 @@ Route::get("/editAdmin/{id}", [AdminController::class, "edit"]);
 // 管理者編集
 Route::post("/adminList", [AdminController::class, "update"]);
 
+// 管理者削除画面
+Route::get("/deleteAdmin/{id}", [AdminController::class, "delete"]);
+
+// 管理者削除
+Route::post("/admin", [AdminController::class, "destroy"]);
+
+
+

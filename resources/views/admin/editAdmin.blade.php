@@ -41,11 +41,11 @@
         </div>
         <p>■管理者に付与する権限を選択して下さい</p>
         <div>
-            <input type="checkbox" value="管理者権限" name="authentication" id="auth">
+            <input type="checkbox" value="4" name="authentication" id="auth">
             <label for="auth">管理者権限</label></br>
-            <input type="checkbox" value="設定権限" name="setting" id="setting">
+            <input type="checkbox" value="2" name="setting" id="setting">
             <label for="setting">設定権限</label></br>
-            <input type="checkbox" value="発注履歴削除権限" name="delOrderHistory" id="del">
+            <input type="checkbox" value="1" name="delOrderHistory" id="del">
             <label for="del">発注履歴削除権限</label></br>
         </div>
         <input type="submit" name="adminList" value="編集">
