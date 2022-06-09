@@ -34,8 +34,17 @@ require __DIR__.'/auth.php';
 // 商品一覧画面
 Route::get('/item', [ItemController::class, "index"]);
 
+/**
+ * 在庫
+ */
 // 在庫一覧画面
 Route::get('/stock', [StockController::class, "index"]);
+
+// 在庫下限設定画面
+Route::get("/stockLowerLimit/{id}", [StockController::class, "edit"]);
+
+// 在庫下限変更機能
+Route::post("/stock", [StockController::class, "update"]);
 
 // 発注履歴画面
 Route::get('/orderHistory', [OrderHistoryController::class, "index"]);

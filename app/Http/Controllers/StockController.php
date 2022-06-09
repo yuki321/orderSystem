@@ -77,21 +77,28 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stock $stock)
+    public function edit(string $id)
     {
-        //
+        // $stock = Stock::find($id);
+        $stock = Stock::where("itemId", "=", $id)->first();
+        return view("stock.stockLowerLimit")
+        ->with("stock", $stock);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateStockRequest  $request
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStockRequest $request, Stock $stock)
+    public function update(Request $request)
     {
-        //
+        $stock = Stock::find($request->id);
+
+        $stock->minStock = $request->minStock;
+        $stock->save();
+        
+        return redirect("/stock");
     }
 
     /**
