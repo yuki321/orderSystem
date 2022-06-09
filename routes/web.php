@@ -49,11 +49,14 @@ Route::get('/admin', function(){
 // 管理者一覧画面
 Route::get("/adminList", [AdminController::class, "index"]);
 
+// 管理者詳細画面
+Route::get("/adminDetail/{id}", [AdminController::class, "show"]);
+
 // 管理者作成画面（新規管理者登録）
 Route::get("/createAdmin", [AdminController::class, "create"]);
 
 // 管理者作成
-Route::post("/adminList", [AdminController::class, "store"]);
+Route::post("/dashboard", [AdminController::class, "store"]);
 
 // 管理者編集画面
 Route::get("/editAdmin/{id}", [AdminController::class, "edit"]);

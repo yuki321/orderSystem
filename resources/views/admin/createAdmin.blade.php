@@ -22,7 +22,7 @@
         <a href="/dashboard">Main</a><br>
     </div>
 
-    <form action="/adminList" method="POST">
+    <form action="/dashboard" method="POST">
         @csrf
         @if($errors->any())
         <div class="alert alert-danger">

@@ -16,7 +16,7 @@ class AdminController extends Controller
     {
         $this->adminRepository = $adminRepository;
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +25,22 @@ class AdminController extends Controller
     public function index()
     {
         $admins = $this->adminRepository->getAllAdmins();
-
+        
         return view("admin.adminList")
         ->with("admins", $admins);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $admin = Admin::find($id);
+        return view("admin.adminDetail")
+        ->with("admin", $admin);
     }
 
     /**
@@ -75,16 +88,6 @@ class AdminController extends Controller
         return redirect("/adminList");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Admin $admin)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
