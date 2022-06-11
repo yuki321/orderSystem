@@ -27,10 +27,6 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a href="/adminList">管理者一覧</a><br>
                     <a href="">ユーザ一覧</a><br>
-                    <a href="">ユーザ更新</a><br>
-                    <a href="">ユーザ削除</a><br>
-                    <a href="">発注履歴削除</a><br>
-                    <a href="">最低在庫設定機能</a><br>
                     <a href="">在庫修正機能</a><br>
                 </div>
             </div>

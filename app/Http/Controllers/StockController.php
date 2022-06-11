@@ -9,8 +9,6 @@ use App\Http\Requests\UpdateStockRequest;
 use App\Interfaces\StockRepositoryInterface;
 use App\Models\Stock;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
@@ -24,6 +22,7 @@ class StockController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \Illuminate\Http\Request;
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -74,30 +73,30 @@ class StockController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Stock  $stock
+     * @param  string $id
      * @return \Illuminate\Http\Response
      */
     public function edit(string $id)
     {
-        // $stock = Stock::find($id);
         $stock = Stock::where("itemId", "=", $id)->first();
+        // 在庫テーブルと商品テーブルをjoin
+        $contents = $stock->join("items", "stocks.itemId", "=", "items.id");
+
         return view("stock.stockLowerLimit")
-        ->with("stock", $stock);
+        ->with("stock", $stock)
+        ->with("contents", $contents->first());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\Stock  $stock
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
-        $stock = Stock::find($request->id);
+    {      
+        $this->stockRepository->updateStockInfo($request);
 
-        $stock->minStock = $request->minStock;
-        $stock->save();
-        
         return redirect("/stock");
     }
 

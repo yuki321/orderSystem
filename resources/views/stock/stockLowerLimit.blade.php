@@ -23,16 +23,16 @@
     </div>
 
     <div>
-        商品名: <p></p>
+        商品名: <p>{{ $contents->itemName }}</p>
     </div>
     <div>
-        実在庫数: <p></p>
+        実在庫数: <p>{{ $stock->actualStock }}</p>
     </div>
     <div>
-        週間減少在庫数: <p></p>
+        週間減少在庫数: <p>{{ $stock->minStock }}</p>
     </div>
     <div>
-        現在下限在庫数: <p></p>
+        現在下限在庫数: <p>{{ $stock->decreasePerWeek }}</p>
     </div>
     <br>
 
