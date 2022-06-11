@@ -11,7 +11,7 @@ class StockRepository implements StockRepositoryInterface {
 
     public function getAllstocks(Request $request){
 
-        // // 検索フォームに入力された内容を取得する
+        // 検索フォームに入力された内容を取得する
         $search = $request->input("search");
         
         $max = $request->input("max");
@@ -45,6 +45,17 @@ class StockRepository implements StockRepositoryInterface {
                 
          return $query;
     }
+
+    /**
+     * updateメソッド(StockController)
+     */
+    public function updateStockInfo(Request $request){
+        $stock = Stock::find($request->id);
+
+        $stock->minStock = $request->minStock;
+        $stock->save();
+    }
+
 
 }
 

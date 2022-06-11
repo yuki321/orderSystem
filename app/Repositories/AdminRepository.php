@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Interfaces\AdminRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Admin;
 
 class AdminRepository implements AdminRepositoryInterface {
     /**
@@ -18,7 +20,7 @@ class AdminRepository implements AdminRepositoryInterface {
     }
 
     /**
-     * storeメソッド
+     * createソッド
      * createAdmin.blade.php
      */
     public function getUsersWithoutAdmins(){
@@ -64,6 +66,45 @@ class AdminRepository implements AdminRepositoryInterface {
 
         return $usersWithoutAdmins;
     }
+
+    /**
+     * storeのメソッド
+     */
+    public function storeAdmin(Request $request){
+        $admin = new Admin();
+        $admin->userId = Auth::id();
+        $admin->adminName = $request->adminName;
+
+        // 権限を算出
+        $admin->admin = 0;
+        if($request->authentication) $admin->admin = $admin->admin + 4;
+        if($request->setting) $admin->admin = $admin->admin + 2;
+        if($request->delOrderHistory) $admin->admin = $admin->admin + 1;
+        
+        $admin->save();
+
+    }
+
+    /**
+     * updateのメソッド（AdminController）
+     */
+    public function updateAdmin(Request $request){
+        $admin = Admin::find($request->id);
+
+        // 権限の編集   
+        $total = 0;
+        if(isset($request->authentication) | isset($request->setting) | isset($request->delOrderHistory)){
+            $total = (int)$request->authentication + (int)$request->setting + (int)$request->delOrderHistory;
+        }
+
+        $admin->adminName = $request->adminName;
+        $admin->admin = $total;
+        $admin->save();
+
+    }
+
+
+
 
 }
 

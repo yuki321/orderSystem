@@ -6,8 +6,6 @@ use App\Http\Requests\UpdateAdminRequest;
 use App\Interfaces\AdminRepositoryInterface;
 use App\Models\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -60,7 +58,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreAdminRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -73,17 +71,7 @@ class AdminController extends Controller
         //     ->withInput();
         // }
 
-        $admin = new Admin();
-        $admin->userId = Auth::id();
-        $admin->adminName = $request->adminName;
-
-        // 権限を算出
-        $admin->admin = 0;
-        if($request->authentication) $admin->admin = $admin->admin + 4;
-        if($request->setting) $admin->admin = $admin->admin + 2;
-        if($request->delOrderHistory) $admin->admin = $admin->admin + 1;
-        
-        $admin->save();
+        $this->adminRepository->storeAdmin($request);
 
         return redirect("/adminList");
     }
@@ -105,7 +93,7 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAdminRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -118,17 +106,7 @@ class AdminController extends Controller
         //     ->withInput();
         // }
 
-        $admin = Admin::find($request->id);
-
-        // 権限の編集   
-        $total = 0;
-        if(isset($request->authentication) | isset($request->setting) | isset($request->delOrderHistory)){
-            $total = (int)$request->authentication + (int)$request->setting + (int)$request->delOrderHistory;
-        }
-
-        $admin->adminName = $request->adminName;
-        $admin->admin = $total;
-        $admin->save();
+        $this->adminRepository->updateAdmin($request);
 
         return redirect("/adminList");
     }
