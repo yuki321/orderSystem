@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Stock</title>
 </head>
 <body>
@@ -50,7 +51,7 @@
             @foreach($contents as $content)
             <tr>
                 <td scope="row">{{ $content->id }}</td>
-                <td>{{ $content->itemName }}</td>
+                <td><a href="/stockLowerLimit/{{ $content->id }}">{{ $content->itemName }}</a></td>
                 <td>{{ $content->actualStock }}</td>
                 <td>{{ $content->minStock }}</td>
                 <td>{{ $content->decreasePerWeek }}</td>
