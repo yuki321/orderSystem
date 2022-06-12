@@ -19,21 +19,21 @@
             @csrf
         </form>
 
-        <h1>在庫一覧画面</h1>
+        <h1 class="text-xl my-4 font-bold">在庫一覧画面</h1>
         <div>
-            <a href="/dashboard" class="text-gray-500 underline-offset-auto">Main</a><br>
+            <a href="/dashboard" class="underline decoration-sky-600 hover:bg-blue-500">Main</a><br>
         </div>
         
-        <form action="/content" method="get">
+        <form action="/content" method="get" class="my-4">
             @csrf
-            <p>
+            <p class="my-2">
                 検索ワード: <input type="text" name="search">
             </p>
 
-            <p>
+            <p class="my-2">
                 実在庫数(上限): <input type="number" name="max">
             </p>
-            <p>
+            <p class="my-2">
                 実在庫数(下限): <input type="number" name="min">
             </p>
             <input type="submit" value="検索" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  my-4 rounded">
@@ -59,18 +59,18 @@
                     @if($content->actualStock < $content->minStock)
                     
                     <!-- 管理者の場合、商品の下限在庫数設定機能を使用することができる -->
-                    @if($isAdmin)
-                    <td style="color: red;"><a href="/stockLowerLimit/{{ $content->id }}"><b>在庫が下限在庫数を下回っています。</b></a></td>
-                    @else
+                        @if($isAdmin)
+                        <td style="color: red;"><a href="/stockLowerLimit/{{ $content->id }}" class="hover:bg-blue-400"><b>在庫が下限在庫数を下回っています。</b></a></td>
+                        @else
                         <td style="color: red;"><b>在庫が下限在庫数を下回っています。</b></td>
                         @endif
-                        @elseif($content->actualStock - $content->decreasePerWeek < $content->minStock)
+                    @elseif($content->actualStock - $content->decreasePerWeek < $content->minStock)
                         @if($isAdmin)
-                        <td style="color: skyblue"><a href="/stockLowerLimit/{{ $content->id }}">1週間以内に在庫が下限在庫数を下回る可能性が高いです。</a></td>
+                        <td style="color: skyblue"><a href="/stockLowerLimit/{{ $content->id }}" class="hover:bg-blue-400">1週間以内に在庫が下限在庫数を下回る可能性が高いです。</a></td>
                         @else
                         <td style="color: skyblue">1週間以内に在庫が下限在庫数を下回る可能性が高いです。</td>
                         @endif
-                        @endif
+                    @endif
                 </tr>
                 @endforeach
             </tbody> 
