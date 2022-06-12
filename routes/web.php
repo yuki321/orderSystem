@@ -46,8 +46,18 @@ Route::get("/stockLowerLimit/{id}", [StockController::class, "edit"]);
 // 在庫下限変更機能
 Route::post("/stock", [StockController::class, "update"]);
 
+
+/**
+ * 発注
+ */
 // 発注履歴画面
 Route::get('/orderHistory', [OrderHistoryController::class, "index"]);
+
+// 発注履歴削除画面
+Route::get('/deleteOrderHistories/{id}', [OrderHistoryController::class, "delete"]);
+
+// 発注履歴削除
+Route::post("/orderHistory", [OrderHistoryController::class, "destroy"]);
 
 /** 管理者 */
 // 管理者画面

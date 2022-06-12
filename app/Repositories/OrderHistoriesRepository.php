@@ -14,7 +14,7 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
 
         // 検索フォームに入力された内容を取得する
         $item_name = $request->input("item_name");
-        $company_name = $request->input("company_name");
+        // $company_name = $request->input("company_name");
         $order_max = $request->input("order_max");
         $order_min = $request->input("order_min");
         $totalPrice_max = $request->input("totalPrice_max");
@@ -32,14 +32,21 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
             $totalPrice_max = $tmp;
         }
 
-        $query = OrderHistory::where(function($contents){
-            $contents->select('id')
-            ->from('order_histories')
-            ->orderByDesc('order_histories.id');
-        });
+        $query = orderHistory::select([
+            "o.id",
+            "i.itemName",
+            "o.numOfOrder",
+            "o.totalPrice"
+        ])
+        ->from("order_histories as o")
+        ->join("items as i", function($join){
+            $join->on("o.itemId", "=", "i.id");
+        })
+        ->orderBy("o.id")
+        ->paginate(20);
         
         // 検索内容の入力内容とDBを比較すて、部分一致があれば
-        $query = $this->getSearchResult($query, $item_name, $company_name);
+        // $query = $this->getSearchResult($query, $item_name, $company_name);
 
         // 発注数の上限下限を絞る
         $query = $this->searchOrderMaxMin($query, $order_max, $order_min);
@@ -50,17 +57,17 @@ class OrderHistoriesRepository implements OrderHistoriesRepositoryInterface {
         return $query;
     }
 
-    public function getSearchResult($query, $item_name, $company_name){
-        // 検索内容の入力内容とDBを比較すて、部分一致があれば
-        if($item_name){
-            $query->where("items.itemName", "like", "%".$item_name."%");
-        }
-        if($company_name){
-            $query->where("customers.companyName", "like", "%".$company_name."%");
-        }
+    // public function getSearchResult($query, $item_name, $company_name){
+    //     // 検索内容の入力内容とDBを比較すて、部分一致があれば
+    //     if($item_name){
+    //         $query->where("items.itemName", "like", "%".$item_name."%");
+    //     }
+    //     if($company_name){
+    //         $query->where("customers.companyName", "like", "%".$company_name."%");
+    //     }
 
-        return $query;
-    }
+    //     return $query;
+    // }
 
     public function searchOrderMaxMin($query, $order_max, $order_min){
         // 発注数の下限(order_min)

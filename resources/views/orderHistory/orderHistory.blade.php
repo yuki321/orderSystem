@@ -30,9 +30,6 @@
                 商品名: <input type="text" name="item_name">
             </p>
             <p class="my-2">
-                企業名: <input type="text" name="company_name">
-            </p>
-            <p class="my-2">
                 発注数(上限): <input type="number" name="order_max">
             </p>
             <p class="my-2">
@@ -53,7 +50,6 @@
             <thead>
                 <th>#</th>
                 <th scope="col">商品名</th>
-                <th scope="col">顧客名</th>
                 <th scope="col">発注数</th>
                 <th scope="col">合計金額</th>
             </thead>
@@ -62,10 +58,10 @@
                 <tr>
                     <td scope="row">{{ $content->id }}</td>
                     <td>{{ $content->itemName }}</td>
-                    <td>{{ $content->companyName }}</td>
                     <td>{{ $content->numOfOrder }}</td>
                     <td>{{ $content->totalPrice }}</td>
-
+                    <td><a href="/deleteOrderHistories/{{ $content->id }}"
+                        class="hover:bg-blue-500 px-2 py-1">削除</a></td>
                 </tr>
                 @endforeach
             </tbody> 

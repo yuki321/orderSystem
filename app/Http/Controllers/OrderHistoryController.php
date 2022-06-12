@@ -6,7 +6,11 @@ use App\Http\Requests\StoreOrderHistoryRequest;
 use App\Http\Requests\UpdateOrderHistoryRequest;
 use App\Interfaces\OrderHistoriesRepositoryInterface;
 use App\Models\OrderHistory;
+use App\Models\Customer;
+use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class OrderHistoryController extends Controller
 {
@@ -25,13 +29,14 @@ class OrderHistoryController extends Controller
     public function index(Request $request)
     {
         // OrderHistoryテーブルからデータを取得
-        $orderHistories = $this->orderHistoriesRepository->getAllOrderHistories($request);
+        $contents = $this->orderHistoriesRepository->getAllOrderHistories($request);
 
-        $contents = $orderHistories->join("items", "order_histories.itemId", "=", "items.id");
-        $contents = $orderHistories->join("customers", "order_histories.customerId", "=", "customers.id");
+        // $contents = $orderHistories->join("items", "order_histories.itemId", "=", "items.id");
+        // $contents = $orderHistories->join("customers", "order_histories.customerId", "=", "customers.id");
 
         return view("orderHistory.orderHistory")
-        ->with("contents", $contents->paginate(20));
+        // ->with("contents", $contents->paginate(20));
+        ->with("contents", $contents);
 
     }
 
@@ -90,14 +95,32 @@ class OrderHistoryController extends Controller
         //
     }
 
+    public function delete(string $id){
+
+        // 発注履歴テーブルからデータを取得
+        $orderHistory = OrderHistory::find($id);
+
+        // 商品テーブルのIDと発注履歴テーブルのItemIdが一致するデータを取得
+        $item = Item::whereId($orderHistory->itemId)->first();
+
+        // 顧客テーブルのIDと発注履歴テーブルのItemIdが一致するデータを取得
+        $customer = Customer::whereId($orderHistory->customerId)->first();
+
+        return view("orderHistory.deleteOrderHistories")
+        ->with("orderHistory", $orderHistory)
+        ->with("customer", $customer)
+        ->with("item", $item);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\OrderHistory  $orderHistory
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderHistory $orderHistory)
+    public function destroy(Request $request)
     {
-        //
+        OrderHistory::find($request->id)->delete();
+        return redirect("/orderHistory");
     }
 }
