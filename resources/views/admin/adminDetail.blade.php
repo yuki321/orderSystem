@@ -9,33 +9,39 @@
     <title>Admin Detail</title>
 </head>
 <body>
-    <a href={{ route('logout') }} onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-        <b>Logout</b>
-    </a>
-    <form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
-        @csrf
-    </form>
+    <div class="m-6">
+        <a href={{ route('logout') }} onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            <b>Logout</b>
+        </a>
+        <form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
+            @csrf
+        </form>
 
-    <h1>管理者詳細画面</h1>
-    <div>
-        <a href="/dashboard">Main</a><br>
+        <h1 class="text-xl my-4 font-bold">管理者詳細画面</h1>
+        <div class="mb-4">
+            <a href="/dashboard" 
+                class="underline decoration-sky-600 hover:bg-blue-500">Main</a><br>
+        </div>
+
+        <table class="table-auto my-4">
+            <div class="my-1 flex flex-wrap">
+                <div class="w-40 font-bold">管理者名</div>
+                <div class="flex-1">{{ $admin->adminName }}</div>
+            </div>
+            <div class="my-1 flex flex-wrap">
+                <div class="w-40 font-bold">権限</div>
+                <div class="flex-1">{{ $admin->admin }}</div>
+            </div>
+        </table>
+        <a href="/editAdmin/{{ $admin->id }}" 
+            class="underline decoration-sky-600 hover:bg-blue-500">編集</a><br>
+        <a href="/deleteAdmin/{{ $admin->id }}" 
+            class="underline decoration-sky-600 hover:bg-blue-500">削除</a><br>
+        <br>
+        <a href="/adminList" 
+            class="underline decoration-sky-600 hover:bg-blue-500">管理者一覧画面</a>
     </div>
-
-    <table class="table">
-        <tr>
-            <th scope="col">管理者名</th><td>{{ $admin->adminName }}</td>
-        </tr>
-        <tr>
-            <th scope="col">権限</th><td>{{ $admin->admin }}</td>
-        </tr>
-    </table>
-    <a href="/editAdmin/{{ $admin->id }}">編集</a><br>
-    <a href="/deleteAdmin/{{ $admin->id }}">削除</a><br>
-    <br>
-
-    <a href="/adminList">管理者一覧画面</a>
-
 </body>
 </html>
 

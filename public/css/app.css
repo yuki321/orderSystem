@@ -863,6 +863,12 @@ video {
 }
 
 
+ .my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+
  .ml-3 {
   margin-left: 0.75rem;
 }
@@ -950,6 +956,16 @@ video {
 
  .ml-6 {
   margin-left: 1.5rem;
+}
+
+
+ .mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+
+ .mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 
@@ -1417,6 +1433,12 @@ video {
 }
 
 
+ .px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+
  .pt-8 {
   padding-top: 2rem;
 }
@@ -1459,6 +1481,11 @@ video {
 
  .pb-1 {
   padding-bottom: 0.25rem;
+}
+
+
+ .pb-6 {
+  padding-bottom: 1.5rem;
 }
 
 
