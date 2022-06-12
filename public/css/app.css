@@ -948,6 +948,11 @@ video {
 }
 
 
+ .ml-6 {
+  margin-left: 1.5rem;
+}
+
+
  .block {
   display: block;
 }
@@ -1085,6 +1090,11 @@ video {
 
  .max-w-7xl {
   max-width: 80rem;
+}
+
+
+ .max-w-4xl {
+  max-width: 56rem;
 }
 
 

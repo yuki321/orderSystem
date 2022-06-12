@@ -36,7 +36,8 @@
             <p class="my-2">
                 実在庫数(下限): <input type="number" name="min">
             </p>
-            <input type="submit" value="検索" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  my-4 rounded">
+            <input type="submit" value="検索"
+             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-4 rounded">
         </form>
 
         @if($contents->count() > 0)
