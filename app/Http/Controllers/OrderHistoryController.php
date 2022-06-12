@@ -9,8 +9,6 @@ use App\Models\OrderHistory;
 use App\Models\Customer;
 use App\Models\Item;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 
 class OrderHistoryController extends Controller
 {
@@ -30,9 +28,6 @@ class OrderHistoryController extends Controller
     {
         // OrderHistoryテーブルからデータを取得
         $contents = $this->orderHistoriesRepository->getAllOrderHistories($request);
-
-        // $contents = $orderHistories->join("items", "order_histories.itemId", "=", "items.id");
-        // $contents = $orderHistories->join("customers", "order_histories.customerId", "=", "customers.id");
 
         return view("orderHistory.orderHistory")
         // ->with("contents", $contents->paginate(20));
