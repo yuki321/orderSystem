@@ -24,7 +24,7 @@
             <a href="/dashboard" class="underline decoration-sky-600 hover:bg-blue-500">Main</a><br>
         </div>
         
-        <form action="/content" method="get" class="my-4">
+        <form action="/stock" method="get" class="my-4">
             @csrf
             <p class="my-2">
                 検索ワード: <input type="text" name="search">
