@@ -61,7 +61,7 @@
         </form>
     <br>
     
-    <a href="/adminList" class="underline decoration-sky-600 hover:bg-blue-500">管理者一覧画面</a>
+    <a href="/stock" class="underline decoration-sky-600 hover:bg-blue-500">在庫一覧画面</a>
     </div>
 
 </body>
