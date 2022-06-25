@@ -53,8 +53,8 @@
         <p><b>該当するデータはありません。</b></p>
         @endif
        
-        <div mt-4>
-            {{ $admins->links() }}
+        <div>
+            {{ $admins->links('vendor.pagination.semantic-ui') }}
         </div>
     </div>
 

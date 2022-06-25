@@ -80,7 +80,7 @@
         <p><b>該当するデータはありません。</b></p>
         @endif
         
-        {{ $contents->links() }}
+        {{ $contents->links('vendor.pagination.semantic-ui') }}
     </div>
     
 </body>

@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <div class="ui pagination menu" role="navigation">
+    <div class="ui pagination menu my-5" role="navigation">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <a class="icon item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')"> <i class="left chevron icon"></i> </a>
@@ -18,9 +18,9 @@
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <a class="item active" href="{{ $url }}" aria-current="page">{{ $page }}</a>
+                        <a class="item active bg-blue-500 text-white font-bold rounded px-3 py-1" href="{{ $url }}" aria-current="page">{{ $page }}</a>
                     @else
-                        <a class="item" href="{{ $url }}">{{ $page }}</a>
+                        <a class="item hover:bg-blue-400 rounded px-2 py-1" href="{{ $url }}">{{ $page }}</a>
                     @endif
                 @endforeach
             @endif
