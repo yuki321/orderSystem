@@ -61,6 +61,7 @@
         </form>
     <br>
     
+    <a href="/itemOrder/{{ $contents->itemId }}" class="underline decoration-sky-600 hover:bg-blue-500">商品発注画面</a><br>
     <a href="/stock" class="underline decoration-sky-600 hover:bg-blue-500">在庫一覧画面</a>
     </div>
 
