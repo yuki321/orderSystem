@@ -53,6 +53,11 @@
                     <td scope="row">{{ $item->id }}</td>
                     <td>{{ $item->itemName }}</td>
                     <td>{{ $item->unitPrice }}</td>
+
+                    @if($isAdmin)
+                    <td><a href="/itemOrder/{{ $item->id }}" 
+            class=" decoration-sky-600 hover:bg-blue-500 px-2 py-1">発注</a></td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody> 

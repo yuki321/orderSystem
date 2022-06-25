@@ -31,8 +31,17 @@ Route::get('/dashboard', [DashboardController::class, "index"]
 
 require __DIR__.'/auth.php';
 
+/**
+ * 商品
+ */
 // 商品一覧画面
 Route::get('/item', [ItemController::class, "index"]);
+
+// 商品発注画面
+Route::get('/itemOrder/{id}', [ItemController::class, "show"]);
+
+// 発注
+Route::post("/item", [ItemController::class, "order"]);
 
 /**
  * 在庫
@@ -48,7 +57,7 @@ Route::post("/stock", [StockController::class, "update"]);
 
 
 /**
- * 発注
+ * 発注履歴
  */
 // 発注履歴画面
 Route::get('/orderHistory', [OrderHistoryController::class, "index"]);

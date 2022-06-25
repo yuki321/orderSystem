@@ -19,7 +19,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a href="/orderHistory" class="font-bold hover:bg-blue-500">発注履歴一覧</a><br>
-                    <a href="" class="font-bold hover:bg-blue-500">発注</a><br>
                     <a href="/stock" class="font-bold hover:bg-blue-500">在庫一覧</a><br>
                     <a href="/item" class="font-bold hover:bg-blue-500">商品一覧</a><br>
                     <!-- 管理者の場合、管理者画面へのリンクが表示される -->
